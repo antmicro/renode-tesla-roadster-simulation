@@ -1,0 +1,50 @@
+:name: Roadster
+:description: This script runs unmodified Tesla Roadster VMS firmware.
+
+$name?="Roadster"
+$bin?=$ORIGIN/linux.bin
+$image?=$ORIGIN/vms.image
+
+i $ORIGIN/src/CANDecoder.cs
+
+using sysbus
+mach create $name
+machine LoadPlatformDescription @platforms/cpus/lpc2294.repl
+
+machine LoadPlatformDescriptionFromString
+"""
+canuart: CAN.CANToUART @ sysbus
+    rxFromCANId: 0x7fd
+    txToCANId: 0x7fe
+"""
+
+machine SamsungK9NANDFlashFromFile $ORIGIN/flash.bin 0x80000000 "flash" nonPersistent=true
+
+emulation CreateCANHub "canuarthub"
+canuarthub AttachTo canuart
+canuarthub AttachTo can4
+
+machine LoadPlatformDescriptionFromString "decoder: CAN.CANDecoder @ sysbus"
+emulation CreateCANHub "canhub"
+canhub AttachTo can1
+canhub AttachTo can2
+canhub AttachTo can3
+canhub AttachTo decoder
+
+showAnalyzer canuart
+
+logFile $ORIGIN/roadster.log
+
+logLevel 3 sysbus
+
+macro reset
+"""
+    sysbus ZeroRange <0x81400000 0x200000>
+    sysbus LoadBinary $image 0x81400000
+
+    sysbus LoadBinary $bin 0x81000000
+    cpu PC 0x81000000
+"""
+
+runMacro $reset
+
