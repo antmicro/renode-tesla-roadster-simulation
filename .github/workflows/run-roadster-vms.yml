@@ -1,0 +1,31 @@
+name: Run Roadster VMS firmware in Renode
+on: [push]
+jobs:
+  run-roadster-vms:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout submodule with Roadster firmware in LFS
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          lfs: true
+      - name: Install dependencies
+        run: sudo apt -qqy install libarchive-tools
+      - name: Extract Roadster VMS firmware
+        run: |
+          bsdtar xf "roadster_release/Diagnostic Software/Roadster All Rev 13.05.21.iso" Roadster-5.2.0.zip
+          bsdtar xf Roadster-5.2.0.zip --strip-components=2 roadster-5.2.0/vehicle-firmware-5.2.0.43/{firmware.rc,linux.bin,vms.image}
+      - name: Run Renode tests
+        uses: antmicro/renode-test-action@v3.1.0
+        with:
+          renode-version: 'latest'
+          tests-to-run: 'roadster.robot'
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: results
+          path: |
+            roadster.log
+            robot_output.xml
+            log.html
+            report.html
