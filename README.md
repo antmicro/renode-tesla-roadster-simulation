@@ -17,13 +17,13 @@ Recently, Tesla released a large package of documentation and software related t
 
 ## Running locally
 
-To follow these steps you'll need to have a recent version of Renode installed. Refer to [the installation guide in Renode's README](https://github.com/renode/renode/blob/master/README.rst#installation), or use [renode-run](https://github.com/antmicro/renode-run).
+To follow these steps, you need a recent version of Renode installed. Refer to [the installation guide in Renode's README](https://github.com/renode/renode/blob/master/README.rst#installation), or use [renode-run](https://github.com/antmicro/renode-run).
 
 ### Obtaining the firmware files
 
-First, you'll need a copy of the [Roadster diagnostic disc image](https://github.com/teslamotors/roadster/blob/b71b47cd3c82ad58e1aefb770d9489c7c0e94980/Diagnostic%20Software/Roadster%20All%20Rev%2013.05.21.iso). This repository includes the [teslamotors/roadster](https://github.com/teslamotors/roadster) repository as a submodule ([`roadster_release`](./roadster_release)), so you can use it or download the image manually.
+First, you need a copy of the [Roadster diagnostic disc image](https://github.com/teslamotors/roadster/blob/b71b47cd3c82ad58e1aefb770d9489c7c0e94980/Diagnostic%20Software/Roadster%20All%20Rev%2013.05.21.iso). This repository includes the [teslamotors/roadster](https://github.com/teslamotors/roadster) repository as a submodule ([`roadster_release`](./roadster_release)), so you can use it or download the image manually.
 
-Now, let's extract the firmware files from the image. If you have `bsdtar` installed (available in the `libarchive-tools` package on Debian and derivatives), all you need to do is:
+Now, extract the firmware files from the image. If you have `bsdtar` installed (available in the `libarchive-tools` package on Debian and derivatives), all you need to do is:
 
 ```
 bsdtar xf "roadster_release/Diagnostic Software/Roadster All Rev 13.05.21.iso" Roadster-5.2.0.zip
