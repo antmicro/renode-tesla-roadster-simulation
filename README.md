@@ -19,18 +19,21 @@ Recently, Tesla released a large package of documentation and software related t
 
 To follow these steps, you need a recent version of Renode installed. Refer to [the installation guide in Renode's README](https://github.com/renode/renode/blob/master/README.rst#installation), or use [renode-run](https://github.com/antmicro/renode-run).
 
-### Obtaining the firmware files
+### Getting this repo and the Roadster firmware
 
-First, you need a copy of the [Roadster diagnostic disc image](https://github.com/teslamotors/roadster/blob/b71b47cd3c82ad58e1aefb770d9489c7c0e94980/Diagnostic%20Software/Roadster%20All%20Rev%2013.05.21.iso). This repository includes the [teslamotors/roadster](https://github.com/teslamotors/roadster) repository as a submodule ([`roadster_release`](./roadster_release)), so you can use it or download the image manually.
+This repository contains everything you need to run the demo in Renode, including the original [teslamotors/roadster](https://github.com/teslamotors/roadster) repository as a submodule (in [`roadster_release`](./roadster_release)) which in turn contains a copy of the [Roadster diagnostic disc image](https://github.com/teslamotors/roadster/blob/b71b47cd3c82ad58e1aefb770d9489c7c0e94980/Diagnostic%20Software/Roadster%20All%20Rev%2013.05.21.iso).
 
-To use the [Roadster firmware repository](https://github.com/teslamotors/roadster) included in this repository as a submodule, [set up GitLFS](https://github.com/git-lfs/git-lfs#installing).
+To be able to get the `.iso` file, [you need to make sure you have GitLFS set up](https://github.com/git-lfs/git-lfs#installing).
 
-With GitLFS installed, clone this repository using:
+With Git LFS installed, clone this repository using:
+
 ```
 git clone --recursive https://github.com/antmicro/renode-tesla-roadster-simulation.git
+
 ```
 
-If you want to download the diagnostic disc image manually, you can do that using:
+If you don't have Git LFS or want to download the diagnostic disc image manually, you can do that using:
+
 ```
 wget https://github.com/teslamotors/roadster/raw/b71b47cd3c82ad58e1aefb770d9489c7c0e94980/Diagnostic%20Software/Roadster%20All%20Rev%2013.05.21.iso
 ```
@@ -61,11 +64,13 @@ You will see the Renode Monitor, as well as an analyzer window displaying the CA
 ### Running Robot tests for the VMS
 
 To run the Robot test which verifies decoding of the CAN messages transmitted by the VMS firmware, execute:
+
 ```
 renode-test roadster.robot
 ```
 
 You can use the `--show-log` option to view the output in real time and see the decoded CAN messages as they come in (the following output is an abridged example):
+
 ```
 $ renode-test --show-log roadster.robot
 +++++ Starting test 'roadster.Should Run VMS Original Image'
