@@ -61,6 +61,12 @@ You will see the Renode Monitor, as well as an analyzer window displaying the CA
 
 ![Renode VMS screencast](./images/renode-roadster-vms.svg "Renode VMS screencast")
 
+#### Capturing CAN traffic with Wireshark
+
+Renode includes support for capturing CAN traffic and visualizing it in Wireshark. Just run `emulation LogCANTraffic` in the Monitor and a Wireshark window will appear, displaying all CAN frames sent within the emulation:
+
+![Wireshark showing CAN frames](./images/wireshark-can.png "Wireshark showing CAN frames")
+
 ### Running Robot tests for the VMS
 
 To run the Robot test which verifies decoding of the CAN messages transmitted by the VMS firmware, execute:
