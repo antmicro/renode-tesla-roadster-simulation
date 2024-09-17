@@ -1,5 +1,5 @@
 name: Run Roadster VMS firmware in Renode
-on: [push]
+on: [push, workflow_dispatch]
 jobs:
   run-roadster-vms:
     runs-on: ubuntu-20.04
