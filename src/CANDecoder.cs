@@ -47,7 +47,11 @@ namespace Antmicro.Renode.Peripherals.CAN
 
         private static string TranslateName(Dictionary<int, string> names, int key)
         {
-            return names.GetValueOrDefault(key, $"0x{key:x} (unknown)");
+            if(names.TryGetValue(key, out var name))
+            {
+                return name;
+            }
+            return $"0x{key:x} (unknown)";
         }
 
         private enum MessageId
