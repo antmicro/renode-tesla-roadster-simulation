@@ -21,7 +21,7 @@ jobs:
           renode-version: 'latest'
           tests-to-run: 'roadster.robot'
       - name: Upload artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: results
           path: |
