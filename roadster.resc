@@ -31,6 +31,7 @@ canhub AttachTo can2
 canhub AttachTo can3
 canhub AttachTo decoder
 
+showAnalyzer canhub
 showAnalyzer canuart
 
 logFile $ORIGIN/roadster.log
