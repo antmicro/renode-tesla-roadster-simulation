@@ -1,6 +1,6 @@
 # Renode emulation of the 2008 Tesla Roadster VMS
 
-Copyright (c) 2024 [Antmicro](https://www.antmicro.com)
+Copyright (c) 2024-2026 [Antmicro](https://www.antmicro.com)
 
 ## Background
 
